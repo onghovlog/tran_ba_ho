@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 2. Initialize Core Modules
   initHeaderAndNav();
   initHeroSlider(data.heroSlides);
+  initCourses(data.courses);
   initDesignPortfolio(data.designPortfolio);
   initWebProjects(data.webProjects);
   initLibrary(data.gallery, data.youtubeVideos);
@@ -19,6 +20,98 @@ document.addEventListener('DOMContentLoaded', async () => {
   initScrollAnimations();
   initModalSystem();
 });
+
+/* ==========================================================================
+   COURSES / KHAI GIẢNG MODULE (HORIZONTAL SCROLL & DIRECT FORM LINK)
+   ========================================================================== */
+function initCourses(courses = []) {
+  const track = document.getElementById('courses-track');
+  const scrollContainer = document.getElementById('courses-scroll-container');
+  const prevBtn = document.getElementById('courses-prev-btn');
+  const nextBtn = document.getElementById('courses-next-btn');
+
+  if (!track || !courses || courses.length === 0) return;
+
+  const activeCourses = courses.filter(c => c.active !== false);
+
+  track.innerHTML = activeCourses.map(course => `
+    <article class="course-card fade-up-element in-view" data-course-id="${course.id}" data-slug="${course.slug || ''}">
+      <div class="course-thumb-box">
+        <img src="${course.image}" alt="${course.title}" class="course-thumb-img" loading="lazy" />
+        <span class="course-badge-pill">${course.label || 'Học Online'}</span>
+        ${course.format ? `<span class="course-format-pill">🎯 ${course.format}</span>` : ''}
+      </div>
+      <div class="course-body">
+        <h3 class="course-title">${course.title}</h3>
+        <p class="course-desc">${course.description}</p>
+        <div class="course-skills">
+          ${(course.skills || []).map(skill => `<span class="course-skill-tag">${skill}</span>`).join('')}
+        </div>
+        <a href="#lien-he" class="btn btn-outline-primary btn-sm course-cta-btn" data-course-title="${course.title}">
+          Liên hệ tư vấn →
+        </a>
+      </div>
+    </article>
+  `).join('');
+
+  // Wire up CTA buttons to pre-fill the contact form
+  track.querySelectorAll('.course-cta-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const courseTitle = btn.dataset.courseTitle;
+      const serviceSelect = document.getElementById('service-interest');
+      const messageTextarea = document.getElementById('message');
+      const fullnameInput = document.getElementById('fullname');
+
+      if (serviceSelect && courseTitle) {
+        const exactOptionVal = `Khóa học: ${courseTitle}`;
+        let matched = false;
+        for (let i = 0; i < serviceSelect.options.length; i++) {
+          if (serviceSelect.options[i].value === exactOptionVal || serviceSelect.options[i].text.includes(courseTitle)) {
+            serviceSelect.selectedIndex = i;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          const opt = new Option(`Khóa học: ${courseTitle}`, `Khóa học: ${courseTitle}`, true, true);
+          serviceSelect.add(opt);
+        }
+      }
+
+      if (messageTextarea && courseTitle) {
+        messageTextarea.value = `Tôi quan tâm khóa học: ${courseTitle}. Vui lòng tư vấn thông tin lịch học và hỗ trợ chi tiết giúp tôi!`;
+      }
+
+      setTimeout(() => {
+        if (fullnameInput) fullnameInput.focus();
+      }, 600);
+    });
+  });
+
+  // Wire up Horizontal Scroll Controls for Desktop
+  if (scrollContainer && prevBtn && nextBtn) {
+    function updateArrowButtons() {
+      const scrollLeft = scrollContainer.scrollLeft;
+      const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+      prevBtn.disabled = scrollLeft <= 8;
+      nextBtn.disabled = scrollLeft >= maxScrollLeft - 8;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      const cardWidth = scrollContainer.querySelector('.course-card')?.offsetWidth || 350;
+      scrollContainer.scrollBy({ left: -(cardWidth + 24), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const cardWidth = scrollContainer.querySelector('.course-card')?.offsetWidth || 350;
+      scrollContainer.scrollBy({ left: cardWidth + 24, behavior: 'smooth' });
+    });
+
+    scrollContainer.addEventListener('scroll', updateArrowButtons, { passive: true });
+    window.addEventListener('resize', updateArrowButtons, { passive: true });
+    setTimeout(updateArrowButtons, 200);
+  }
+}
 
 /* ==========================================================================
    HERO BANNER SLIDER MODULE (AUTOPLAY 2S, THEMES, VIDEO, SIDE ARROWS)

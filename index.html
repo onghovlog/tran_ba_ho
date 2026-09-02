@@ -61,6 +61,7 @@
 
       <!-- Desktop Nav & Mobile Drawer -->
       <nav class="header-nav" id="header-nav" aria-label="Điều hướng chính">
+        <a href="#khai-giang" class="nav-link">Khai giảng</a>
         <a href="#thiet-ke" class="nav-link">Thiết kế</a>
         <a href="#website" class="nav-link">Website</a>
         <a href="#shop-co-web" class="nav-link">Shop Có Web</a>
@@ -203,6 +204,47 @@
               Tìm hiểu thêm về tôi →
             </a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSES / KHAI GIẢNG SECTION (HORIZONTAL SCROLL) -->
+    <section class="section courses-section" id="khai-giang">
+      <div class="container">
+        <div class="courses-header-wrapper">
+          <div class="section-header text-center">
+            <div class="section-tag">LỚP HỌC NGẮN HẠN</div>
+            <h2 class="section-title">Khai giảng các lớp học ngắn hạn</h2>
+            <p class="section-subtitle">
+              Học online qua Google Meet, bổ sung kiến thức bạn cần. Các khóa học được xây dựng theo hướng ngắn gọn, thực tế và dễ áp dụng phục vụ ngay cho công việc và kinh doanh.
+            </p>
+          </div>
+
+          <!-- Desktop Navigation Arrows for Horizontal Scroll -->
+          <div class="courses-nav-controls" aria-label="Điều khiển cuộn khóa học">
+            <button type="button" class="courses-scroll-btn prev-btn" id="courses-prev-btn" aria-label="Cuộn sang trái">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button type="button" class="courses-scroll-btn next-btn" id="courses-next-btn" aria-label="Cuộn sang phải">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Horizontal Scrollable Container -->
+        <div class="courses-scroll-container" id="courses-scroll-container" tabindex="0" role="region" aria-label="Danh sách các lớp học ngắn hạn">
+          <div class="courses-track" id="courses-track">
+            <!-- Rendered dynamically from db.json via JS -->
+          </div>
+        </div>
+
+        <!-- Course Footer Note -->
+        <div class="courses-footer-note text-center">
+          <span>Học trực tuyến qua Google Meet</span> • <span>Nội dung thực tế</span> • <span>Dễ ứng dụng ngay</span>
         </div>
       </div>
     </section>
@@ -774,14 +816,23 @@
                 <label for="service-interest" class="form-label">Bạn đang quan tâm <span class="req">*</span></label>
                 <select id="service-interest" name="service" class="form-control" required>
                   <option value="" disabled selected>— Chọn nhu cầu của bạn —</option>
-                  <option value="Thiết kế Logo">Thiết kế Logo</option>
-                  <option value="Thiết kế thương hiệu">Thiết kế thương hiệu</option>
-                  <option value="Thiết kế sự kiện">Thiết kế sự kiện &amp; Poster</option>
-                  <option value="Landing Page">Landing Page</option>
-                  <option value="Website bán hàng">Website bán hàng (Shop Có Web)</option>
-                  <option value="Website theo yêu cầu">Website theo yêu cầu</option>
-                  <option value="Hợp tác kinh doanh">Hợp tác kinh doanh Droppii</option>
-                  <option value="Khác">Khác</option>
+                  <optgroup label="Lớp học ngắn hạn (Khai giảng)">
+                    <option value="Khóa học: Thiết kế chuyên nghiệp">Khóa học: Thiết kế chuyên nghiệp</option>
+                    <option value="Khóa học: Editor chuyên nghiệp">Khóa học: Editor chuyên nghiệp</option>
+                    <option value="Khóa học: Thiết kế UI/UX">Khóa học: Thiết kế UI/UX</option>
+                    <option value="Khóa học: Thiết kế thực chiến">Khóa học: Thiết kế thực chiến</option>
+                    <option value="Khóa học: AI cơ bản">Khóa học: AI cơ bản</option>
+                  </optgroup>
+                  <optgroup label="Dịch vụ Thiết kế & Website">
+                    <option value="Thiết kế Logo">Thiết kế Logo</option>
+                    <option value="Thiết kế thương hiệu">Thiết kế thương hiệu</option>
+                    <option value="Thiết kế sự kiện">Thiết kế sự kiện &amp; Poster</option>
+                    <option value="Landing Page">Landing Page</option>
+                    <option value="Website bán hàng">Website bán hàng (Shop Có Web)</option>
+                    <option value="Website theo yêu cầu">Website theo yêu cầu</option>
+                    <option value="Hợp tác kinh doanh">Hợp tác kinh doanh Droppii</option>
+                    <option value="Khác">Khác</option>
+                  </optgroup>
                 </select>
                 <div class="invalid-feedback">Vui lòng chọn dịch vụ hoặc nhu cầu bạn đang quan tâm.</div>
               </div>
@@ -821,6 +872,7 @@
         <div class="footer-col">
           <div class="footer-col-title">Danh mục</div>
           <ul class="footer-nav-list">
+            <li><a href="#khai-giang">Khai giảng</a></li>
             <li><a href="#thiet-ke">Thiết kế</a></li>
             <li><a href="#website">Website</a></li>
             <li><a href="#shop-co-web">Shop Có Web</a></li>

@@ -105,6 +105,87 @@
       "imageAlt": "Hệ sinh thái kinh doanh online Droppii"
     }
   ],
+  "courses": [
+    {
+      "id": 1,
+      "title": "Thiết kế chuyên nghiệp",
+      "slug": "thiet-ke-chuyen-nghiep",
+      "image": "assets/images/courses/thiet-ke-chuyen-nghiep.svg",
+      "label": "Học Online",
+      "format": "Google Meet",
+      "description": "Học cách xây dựng sản phẩm thiết kế chuyên nghiệp từ chỉnh sửa hình ảnh, thiết kế vector đến ứng dụng AI để tăng tốc quy trình sáng tạo.",
+      "skills": [
+        "Adobe Photoshop",
+        "Adobe Illustrator",
+        "AI hỗ trợ thiết kế"
+      ],
+      "active": true
+    },
+    {
+      "id": 2,
+      "title": "Editor chuyên nghiệp",
+      "slug": "editor-chuyen-nghiep",
+      "image": "assets/images/courses/editor-chuyen-nghiep.svg",
+      "label": "Học Online",
+      "format": "Google Meet",
+      "description": "Phát triển kỹ năng dựng video, xử lý hình ảnh chuyển động, hiệu ứng và sản xuất nội dung ngắn phục vụ TikTok, Reels, YouTube và truyền thông.",
+      "skills": [
+        "Adobe Premiere",
+        "Adobe After Effects",
+        "CapCut"
+      ],
+      "active": true
+    },
+    {
+      "id": 3,
+      "title": "Thiết kế UI/UX",
+      "slug": "ui-ux",
+      "image": "assets/images/courses/ui-ux.svg",
+      "label": "Học Online",
+      "format": "Google Meet",
+      "description": "Học quy trình thiết kế giao diện website và ứng dụng, từ tư duy trải nghiệm người dùng đến xây dựng prototype bằng Figma và AI.",
+      "skills": [
+        "Tư duy thiết kế",
+        "UI/UX cơ bản",
+        "Figma",
+        "AI hỗ trợ UI/UX"
+      ],
+      "active": true
+    },
+    {
+      "id": 4,
+      "title": "Thiết kế thực chiến",
+      "slug": "thiet-ke-thuc-chien",
+      "image": "assets/images/courses/thiet-ke-thuc-chien.svg",
+      "label": "Học Online",
+      "format": "Google Meet",
+      "description": "Tập trung vào các bài tập thực tế như banner, poster, hình ảnh sự kiện và bộ nhận diện nội dung dành cho Facebook, TikTok và các kênh Social Media.",
+      "skills": [
+        "Thiết kế hình ảnh sự kiện",
+        "Thiết kế truyền thông",
+        "Xây dựng thương hiệu Social",
+        "Thiết kế nội dung kinh doanh"
+      ],
+      "active": true
+    },
+    {
+      "id": 5,
+      "title": "AI cơ bản",
+      "slug": "ai-co-ban",
+      "image": "assets/images/courses/ai-co-ban.svg",
+      "label": "Học Online",
+      "format": "Google Meet",
+      "description": "Làm quen với các công cụ AI thiết thực để tạo nội dung, slide, hình ảnh và video phục vụ công việc, học tập hoặc kinh doanh.",
+      "skills": [
+        "Công cụ AI phổ biến",
+        "AI tạo slide",
+        "AI tạo hình ảnh",
+        "AI tạo video",
+        "AI hỗ trợ nội dung"
+      ],
+      "active": true
+    }
+  ],
   "designPortfolio": [
     {
       "id": 1,
