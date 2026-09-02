@@ -1371,9 +1371,6 @@ ol {
   max-width: 480px;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 12px 36px -4px rgba(245, 130, 32, 0.14), 0 4px 16px rgba(0, 0, 0, 0.06);
-  border: 1px solid var(--border);
-  background-color: #ffffff;
   transition: var(--transition);
 }
 
