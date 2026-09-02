@@ -1360,6 +1360,35 @@ ol {
   font-weight: 800;
 }
 
+.business-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.business-visual-wrapper {
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 12px 36px -4px rgba(245, 130, 32, 0.14), 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border);
+  background-color: #ffffff;
+  transition: var(--transition);
+}
+
+.business-visual-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 42px -4px rgba(245, 130, 32, 0.22), 0 8px 24px rgba(0, 0, 0, 0.09);
+}
+
+.business-visual-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
 /* ==========================================================================
    LIBRARY (IMAGE GALLERY & LAZY YOUTUBE VIDEOS)
    ========================================================================== */
