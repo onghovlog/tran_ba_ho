@@ -4,7 +4,7 @@
    Color Palette: Cam (#f58220) & Xanh dương (#1877f2)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Play:wght@400;700&display=swap');
 
 :root {
   /* Brand Colors */
@@ -36,6 +36,7 @@
   
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: 'Play', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
   /* Elevation & Shadows (Subtle, refined) */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -71,6 +72,12 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 16px);
   -webkit-text-size-adjust: 100%;
+}
+
+/* Heading Typography */
+h1, h2, .hero-headline, .section-title, .quote-title, .shop-tagline, .business-title, .mid-cta-title, .contact-info-title {
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
 }
 
 body {
