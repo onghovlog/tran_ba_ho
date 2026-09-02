@@ -206,80 +206,196 @@ function initWebProjects(items = []) {
 }
 
 /* ==========================================================================
-   LIBRARY (GALLERY PHOTOS & LAZY YOUTUBE VIDEOS)
+   LIBRARY (GALLERY PHOTOS & LAZY YOUTUBE VIDEOS - SLIDER CAROUSEL)
    ========================================================================== */
 function initLibrary(galleryItems = [], videoItems = []) {
   const tabButtons = document.querySelectorAll('.library-tab-btn');
-  const photosContainer = document.getElementById('library-photos-view');
-  const videosContainer = document.getElementById('library-videos-view');
+  const photosWrapper = document.getElementById('photos-slider-wrapper');
+  const videosWrapper = document.getElementById('videos-slider-wrapper');
 
-  if (photosContainer) {
-    photosContainer.innerHTML = galleryItems.map(item => `
-      <div class="gallery-item fade-up-element" data-id="${item.id}" role="button" tabindex="0" aria-label="${item.title}">
-        <div class="gallery-thumb-wrapper">
-          <img src="${item.image}" alt="${item.title}" class="gallery-thumb" loading="lazy" />
-        </div>
-        <div class="gallery-info">
-          <div class="gallery-tag">${item.category}</div>
-          <div class="gallery-title">${item.title}</div>
-        </div>
+  const photosTrack = document.getElementById('photos-carousel-track');
+  const photosDots = document.getElementById('photos-slider-dots');
+  const photosPrevBtn = document.getElementById('photos-prev-btn');
+  const photosNextBtn = document.getElementById('photos-next-btn');
+
+  const videosTrack = document.getElementById('videos-carousel-track');
+  const videosDots = document.getElementById('videos-slider-dots');
+  const videosPrevBtn = document.getElementById('videos-prev-btn');
+  const videosNextBtn = document.getElementById('videos-next-btn');
+
+  // Helper function to chunk array into pages
+  function chunkArray(array, size) {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += size) {
+      chunks.push(array.slice(i, i + size));
+    }
+    return chunks.length > 0 ? chunks : [[]];
+  }
+
+  // Generic Slider Initializer
+  function setupSlider({ track, dotsContainer, prevBtn, nextBtn, slidesCount, onSlideChange }) {
+    let currentSlide = 0;
+
+    function goToSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= slidesCount) index = slidesCount - 1;
+      currentSlide = index;
+
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+      // Update Dots
+      const dots = dotsContainer.querySelectorAll('.slider-dot-btn');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlide);
+      });
+
+      // Update Prev / Next buttons
+      if (prevBtn) prevBtn.disabled = currentSlide === 0;
+      if (nextBtn) nextBtn.disabled = currentSlide === slidesCount - 1;
+
+      if (onSlideChange) onSlideChange(currentSlide);
+    }
+
+    // Build Dots
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < slidesCount; i++) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = `slider-dot-btn ${i === 0 ? 'active' : ''}`;
+      dot.setAttribute('aria-label', `Chuyển tới slide ${i + 1}`);
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    if (prevBtn) {
+      prevBtn.onclick = () => goToSlide(currentSlide - 1);
+    }
+    if (nextBtn) {
+      nextBtn.onclick = () => goToSlide(currentSlide + 1);
+    }
+
+    // Hide controls if only 1 slide
+    if (slidesCount <= 1) {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      if (dotsContainer) dotsContainer.style.display = 'none';
+    } else {
+      if (prevBtn) prevBtn.style.display = 'flex';
+      if (nextBtn) nextBtn.style.display = 'flex';
+      if (dotsContainer) dotsContainer.style.display = 'flex';
+    }
+
+    goToSlide(0);
+    return { goToSlide };
+  }
+
+  // 1. Setup Photos Slider (8 boxes per slide)
+  if (photosTrack) {
+    const photoSlides = chunkArray(galleryItems, 8);
+    photosTrack.innerHTML = photoSlides.map(slideItems => `
+      <div class="gallery-slide-grid">
+        ${slideItems.map(item => `
+          <div class="gallery-box-item fade-up-element" data-id="${item.id}" role="button" tabindex="0" aria-label="${item.title}">
+            <img src="${item.image}" alt="${item.title}" class="gallery-box-img" loading="lazy" />
+            <div class="gallery-box-overlay">
+              <span class="gallery-box-cat">${item.category}</span>
+              <h3 class="gallery-box-title">${item.title}</h3>
+            </div>
+          </div>
+        `).join('')}
       </div>
     `).join('');
 
-    photosContainer.querySelectorAll('.gallery-item').forEach(item => {
+    // Attach click events for lightbox modal
+    photosTrack.querySelectorAll('.gallery-box-item').forEach(item => {
       item.addEventListener('click', () => {
         const id = parseInt(item.dataset.id, 10);
         const g = galleryItems.find(x => x.id === id);
-        if (g) openProjectModal({
-          title: g.title,
-          category: g.category,
-          image: g.image,
-          description: g.caption
-        }, 'gallery');
+        if (g) {
+          openProjectModal({
+            title: g.title,
+            category: g.category,
+            image: g.image,
+            description: g.caption
+          }, 'gallery');
+        }
       });
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          item.click();
+        }
+      });
+    });
+
+    setupSlider({
+      track: photosTrack,
+      dotsContainer: photosDots,
+      prevBtn: photosPrevBtn,
+      nextBtn: photosNextBtn,
+      slidesCount: photoSlides.length
     });
   }
 
-  if (videosContainer) {
-    videosContainer.innerHTML = videoItems.map(item => `
-      <article class="video-card fade-up-element">
-        <div class="video-player-container" data-video-id="${item.videoId}" data-video-title="${item.title}" role="button" tabindex="0" aria-label="Phát video ${item.title}">
-          <img src="${item.thumbnail}" alt="${item.title}" class="video-thumb" loading="lazy" />
-          <div class="video-play-btn" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-          <span class="video-duration">${item.duration}</span>
-        </div>
-        <div class="video-body">
-          <div class="video-cat">${item.category}</div>
-          <h3 class="video-title">${item.title}</h3>
-          <p class="video-desc">${item.description}</p>
-        </div>
-      </article>
+  // 2. Setup Videos Slider (6 boxes per slide)
+  if (videosTrack) {
+    const videoSlides = chunkArray(videoItems, 6);
+    videosTrack.innerHTML = videoSlides.map(slideItems => `
+      <div class="videos-slide-grid">
+        ${slideItems.map(item => `
+          <article class="video-box-item fade-up-element">
+            <div class="video-thumb-container" data-video-id="${item.videoId}" data-video-title="${item.title}" role="button" tabindex="0" aria-label="Phát video ${item.title}">
+              <img src="${item.thumbnail}" alt="${item.title}" class="video-box-img" loading="lazy" />
+              <div class="video-box-play-btn" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <span class="video-box-duration">${item.duration}</span>
+            </div>
+            <div class="video-box-info">
+              <span class="video-box-cat">${item.category}</span>
+              <h3 class="video-box-title">${item.title}</h3>
+            </div>
+          </article>
+        `).join('')}
+      </div>
     `).join('');
 
     // Lazy load YouTube iframe inside modal only on click
-    videosContainer.querySelectorAll('.video-player-container').forEach(container => {
+    videosTrack.querySelectorAll('.video-thumb-container').forEach(container => {
       container.addEventListener('click', () => {
         const videoId = container.dataset.videoId;
         const title = container.dataset.videoTitle;
         openVideoModal(videoId, title);
       });
+      container.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          container.click();
+        }
+      });
+    });
+
+    setupSlider({
+      track: videosTrack,
+      dotsContainer: videosDots,
+      prevBtn: videosPrevBtn,
+      nextBtn: videosNextBtn,
+      slidesCount: videoSlides.length
     });
   }
 
-  // Switch tabs
+  // Switch tabs (Photos vs Videos)
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       tabButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const tab = btn.dataset.tab;
       if (tab === 'photos') {
-        photosContainer.style.display = 'grid';
-        videosContainer.style.display = 'none';
+        photosWrapper.style.display = 'block';
+        videosWrapper.style.display = 'none';
       } else {
-        photosContainer.style.display = 'none';
-        videosContainer.style.display = 'grid';
+        photosWrapper.style.display = 'none';
+        videosWrapper.style.display = 'block';
       }
     });
   });

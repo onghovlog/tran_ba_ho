@@ -336,6 +336,62 @@
       "category": "Workshop",
       "image": "assets/images/gallery-08.svg",
       "caption": "Cập nhật các công nghệ tiên phong để nâng cao hiệu suất làm việc."
+    },
+    {
+      "id": 9,
+      "title": "Buổi hướng dẫn thực hành Typography & Layout nâng cao",
+      "category": "Giảng dạy",
+      "image": "assets/images/gallery-01.svg",
+      "caption": "Phân tích cấu trúc phân cấp thị giác và nghệ thuật sử dụng kiểu chữ trong thiết kế thương hiệu."
+    },
+    {
+      "id": 10,
+      "title": "Chia sẻ kinh nghiệm thiết kế Portfolio ấn tượng cho sinh viên",
+      "category": "Workshop",
+      "image": "assets/images/gallery-02.svg",
+      "caption": "Bí quyết trình bày case study chuyên nghiệp thu hút nhà tuyển dụng hàng đầu."
+    },
+    {
+      "id": 11,
+      "title": "Lễ vinh danh các nhóm sinh viên đạt giải xuất sắc kỳ Fall 2025",
+      "category": "Sự kiện",
+      "image": "assets/images/gallery-03.svg",
+      "caption": "Ghi nhận nỗ lực sáng tạo và hoàn thiện dự án thực tế của các tài năng trẻ."
+    },
+    {
+      "id": 12,
+      "title": "Triển lãm sản phẩm thiết kế bao bì & đồ họa nhận diện",
+      "category": "Sự kiện",
+      "image": "assets/images/gallery-04.svg",
+      "caption": "Không gian trưng bày các ấn phẩm in ấn và sản phẩm thương mại thực chiến."
+    },
+    {
+      "id": 13,
+      "title": "Bàn giao website Shop Có Web cho chuỗi thời trang thiết kế",
+      "category": "Dự án",
+      "image": "assets/images/gallery-05.svg",
+      "caption": "Hướng dẫn chủ shop quản trị đơn hàng và đồng bộ kênh bán hàng mạng xã hội."
+    },
+    {
+      "id": 14,
+      "title": "Tọa đàm chiến lược chuyển đổi số cho doanh nghiệp vừa và nhỏ",
+      "category": "Kinh doanh",
+      "image": "assets/images/gallery-06.svg",
+      "caption": "Giải pháp xây dựng website tối ưu chuyển đổi và chăm sóc khách hàng tự động."
+    },
+    {
+      "id": 15,
+      "title": "Thử nghiệm công nghệ Web tương tác 3D & Micro-animations",
+      "category": "Cá nhân",
+      "image": "assets/images/gallery-07.svg",
+      "caption": "Nghiên cứu các hiệu ứng chuyển động mượt mà nâng tầm trải nghiệm người dùng."
+    },
+    {
+      "id": 16,
+      "title": "Khóa đào tạo chuyên sâu Prompt Engineering cho Designer",
+      "category": "Workshop",
+      "image": "assets/images/gallery-08.svg",
+      "caption": "Ứng dụng Midjourney & ChatGPT hỗ trợ phác thảo ý tưởng nhanh chóng."
     }
   ],
   "youtubeVideos": [
@@ -374,6 +430,78 @@
       "thumbnail": "assets/images/video-04.svg",
       "category": "Shop Có Web",
       "description": "Case study thực tế giúp một shop thời trang nhỏ xây dựng kênh bán hàng trực tuyến và tăng gấp đôi lượng đơn."
+    },
+    {
+      "id": 5,
+      "title": "Tư Duy Chọn Màu Sắc & Bảng Màu Chuẩn Cho Thiết Kế Nhận Diện Thương Hiệu",
+      "videoId": "dQw4w9WgXcQ",
+      "duration": "22:05",
+      "thumbnail": "assets/images/video-01.svg",
+      "category": "Graphic Design",
+      "description": "Nguyên lý phối màu và ứng dụng bảng màu trong thiết kế logo, ấn phẩm truyền thông và website."
+    },
+    {
+      "id": 6,
+      "title": "Tối Ưu Tốc Độ Tải Trang & Điểm Số Google Lighthouse Trên 95 Điểm",
+      "videoId": "dQw4w9WgXcQ",
+      "duration": "27:45",
+      "thumbnail": "assets/images/video-02.svg",
+      "category": "Web Performance",
+      "description": "Kỹ thuật tối ưu hóa tài nguyên hình ảnh, JavaScript thuần và cấu trúc CSS tinh gọn."
+    },
+    {
+      "id": 7,
+      "title": "Chiến Lược Tìm Kiếm Sản Phẩm Ngách Bán Chạy Cùng Droppii 2026",
+      "videoId": "dQw4w9WgXcQ",
+      "duration": "25:30",
+      "thumbnail": "assets/images/video-03.svg",
+      "category": "Online Business",
+      "description": "Phân tích nhu cầu thị trường và cách chọn lựa danh mục sản phẩm có tỉ lệ tái mua cao."
+    },
+    {
+      "id": 8,
+      "title": "Bí Quyết Gắn Link Bio TikTok & Reels Tăng Tỉ Lệ Đặt Hàng Tự Động",
+      "videoId": "dQw4w9WgXcQ",
+      "duration": "18:50",
+      "thumbnail": "assets/images/video-04.svg",
+      "category": "Marketing & Web",
+      "description": "Tối ưu trang đích di động giúp khách hàng mua hàng ngay khi lướt mạng xã hội."
+    },
+    {
+      "id": 9,
+      "title": "Hướng Dẫn Thiết Kế Poster Sự Kiện Bằng Photoshop & Illustrator",
+      "videoId": "dQw4w9WgXcQ",
+      "duration": "35:10",
+      "thumbnail": "assets/images/video-01.svg",
+      "category": "Graphic Design",
+      "description": "Quy trình thiết kế key visual và xuất file in ấn chuẩn kích thước cho sự kiện lớn."
+    },
+    {
+      "id": 10,
+      "title": "Lập Trình Form Liên Hệ Thu Hút Khách Hàng Chuẩn Responsive & Validation",
+      "videoId": "dQw4w9WgXcQ",
+      "duration": "29:15",
+      "thumbnail": "assets/images/video-02.svg",
+      "category": "Web Development",
+      "description": "Xử lý kiểm tra dữ liệu đầu vào và kết nối lưu trữ lead khách hàng an toàn."
+    },
+    {
+      "id": 11,
+      "title": "Kỹ Năng Tư Vấn & Chăm Sóc Khách Hàng Bán Hàng Online Tinh Gọn",
+      "videoId": "dQw4w9WgXcQ",
+      "duration": "21:40",
+      "thumbnail": "assets/images/video-03.svg",
+      "category": "Online Business",
+      "description": "Nghệ thuật thấu hiểu khách hàng và giải quyết vấn đề giúp gia tăng doanh số bền vững."
+    },
+    {
+      "id": 12,
+      "title": "Tổng Hợp Công Cụ AI Hàng Đầu Dành Cho Designer & Web Developer 2026",
+      "videoId": "dQw4w9WgXcQ",
+      "duration": "33:25",
+      "thumbnail": "assets/images/video-04.svg",
+      "category": "AI & Tech",
+      "description": "Khám phá các công cụ AI giúp nhân đôi năng suất làm việc mỗi ngày."
     }
   ]
 }

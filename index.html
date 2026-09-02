@@ -488,14 +488,40 @@
           <button type="button" class="library-tab-btn" data-tab="videos">🎥 Video YouTube</button>
         </div>
 
-        <!-- Photos View -->
-        <div class="gallery-grid" id="library-photos-view">
-          <!-- Rendered via JavaScript -->
+        <!-- Photos Slider Carousel (8 boxes per slide) -->
+        <div class="gallery-slider-wrapper" id="photos-slider-wrapper">
+          <div class="gallery-carousel-track" id="photos-carousel-track">
+            <!-- Dynamically rendered slides via JavaScript (8 boxes per slide) -->
+          </div>
+
+          <!-- Slider Controls -->
+          <div class="slider-controls" id="photos-slider-controls">
+            <button type="button" class="slider-nav-btn prev-btn" id="photos-prev-btn" aria-label="Slide ảnh trước">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="slider-dots" id="photos-slider-dots"></div>
+            <button type="button" class="slider-nav-btn next-btn" id="photos-next-btn" aria-label="Slide ảnh tiếp theo">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
         </div>
 
-        <!-- Videos View (Hidden by default) -->
-        <div class="video-grid" id="library-videos-view" style="display: none;">
-          <!-- Rendered via JavaScript -->
+        <!-- Videos Slider Carousel (6 boxes per slide, Hidden by default) -->
+        <div class="gallery-slider-wrapper" id="videos-slider-wrapper" style="display: none;">
+          <div class="gallery-carousel-track" id="videos-carousel-track">
+            <!-- Dynamically rendered slides via JavaScript (6 boxes per slide) -->
+          </div>
+
+          <!-- Slider Controls -->
+          <div class="slider-controls" id="videos-slider-controls">
+            <button type="button" class="slider-nav-btn prev-btn" id="videos-prev-btn" aria-label="Slide video trước">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="slider-dots" id="videos-slider-dots"></div>
+            <button type="button" class="slider-nav-btn next-btn" id="videos-next-btn" aria-label="Slide video tiếp theo">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>
