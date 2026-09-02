@@ -127,28 +127,13 @@ function initHeroSlider(slides = []) {
 
   // Render slides dynamically
   track.innerHTML = slides.map(slide => {
-    let rightVisualHtml = '';
-    if (slide.type === 'content_video') {
-      rightVisualHtml = `
-        <div class="hero-visual">
-          <div class="hero-video-card" data-video-id="${slide.videoId}" data-video-title="${slide.videoTitle || ''}" role="button" tabindex="0" aria-label="Phát video ${slide.videoTitle || ''}">
-            <img src="${slide.videoThumb || 'assets/images/video-01.svg'}" alt="${slide.videoTitle || ''}" class="hero-video-thumb" loading="lazy" />
-            <div class="hero-video-play" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            ${slide.videoDuration ? `<span class="hero-video-duration">${slide.videoDuration}</span>` : ''}
-          </div>
+    const rightVisualHtml = `
+      <div class="hero-visual">
+        <div class="hero-visual-card">
+          <img src="${slide.image || 'assets/images/01_ban_kinh_doanh_can_lam_web.png'}" alt="${slide.imageAlt || ''}" class="hero-visual-img" width="700" height="520" loading="eager" />
         </div>
-      `;
-    } else {
-      rightVisualHtml = `
-        <div class="hero-visual">
-          <div class="hero-visual-card">
-            <img src="${slide.image}" alt="${slide.imageAlt || ''}" class="hero-visual-img" width="700" height="520" loading="eager" />
-          </div>
-        </div>
-      `;
-    }
+      </div>
+    `;
 
     const rolesHtml = slide.roles && slide.roles.length > 0 ? `
       <div class="hero-roles">

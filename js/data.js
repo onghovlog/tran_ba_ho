@@ -36,8 +36,8 @@ const APP_DATA = {
         "Web Developer",
         "Online Business"
       ],
-      "image": "assets/images/hero-visual.svg",
-      "imageAlt": "Minh hoạ website và ứng dụng di động chuẩn UI/UX"
+      "image": "assets/images/01_ban_kinh_doanh_can_lam_web.png",
+      "imageAlt": "Kinh doanh mà chưa có web? Giải pháp Shop Có Web"
     },
     {
       "id": 2,
@@ -59,12 +59,12 @@ const APP_DATA = {
         "Packaging",
         "Social Media"
       ],
-      "image": "assets/images/service-graphic.svg",
+      "image": "assets/images/02_graphic_design.png",
       "imageAlt": "Thiết kế đồ họa và bộ nhận diện thương hiệu chuyên nghiệp"
     },
     {
       "id": 3,
-      "type": "content_video",
+      "type": "content_image",
       "badge": "VIDEO CHIA SẺ & ĐÀO TẠO THỰC CHIẾN",
       "title": "Học thiết kế & lập trình <br /><span class=\"text-highlight\">cùng Trần Bá Hộ</span>",
       "description": "Video bài giảng trực quan, đúc kết từ thực tế giảng dạy tại Cao đẳng FPT Polytechnic và triển khai hàng trăm dự án thương mại thực chiến.",
@@ -82,10 +82,8 @@ const APP_DATA = {
         "Frontend Code",
         "AI Creator"
       ],
-      "videoId": "dQw4w9WgXcQ",
-      "videoTitle": "Hướng Dẫn Thiết Kế Giao Diện UI/UX Bằng Figma Cơ Bản Đến Nâng Cao",
-      "videoThumb": "assets/images/video-01.svg",
-      "videoDuration": "24:15"
+      "image": "assets/images/03_hoc_cung_thay_ho.png",
+      "imageAlt": "Học thiết kế và lập trình cùng Trần Bá Hộ"
     },
     {
       "id": 4,
@@ -107,7 +105,7 @@ const APP_DATA = {
         "App tự động",
         "Đồng hành 1-1"
       ],
-      "image": "assets/images/droppii-business.svg",
+      "image": "assets/images/04_kinh_doanh_droppii.png",
       "imageAlt": "Hệ sinh thái kinh doanh online Droppii"
     }
   ],
