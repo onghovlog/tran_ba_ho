@@ -1,0 +1,567 @@
+/**
+ * TRAN BA HO - PERSONAL LANDING PAGE MAIN JAVASCRIPT
+ * Pure Vanilla JS, Zero Dependencies
+ */
+
+document.addEventListener('DOMContentLoaded', async () => {
+  // 1. Load data from db.json or fallback
+  const data = await window.loadAppData();
+  
+  // 2. Initialize Core Modules
+  initHeaderAndNav();
+  initDesignPortfolio(data.designPortfolio);
+  initWebProjects(data.webProjects);
+  initLibrary(data.gallery, data.youtubeVideos);
+  initArticles(data.articles);
+  initContactForm();
+  initFloatingMobileBar();
+  initScrollAnimations();
+  initModalSystem();
+});
+
+/* ==========================================================================
+   NAVIGATION, STICKY HEADER & SCROLLSPY
+   ========================================================================== */
+function initHeaderAndNav() {
+  const header = document.querySelector('.site-header');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const headerNav = document.querySelector('.header-nav');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+
+  // Sticky Header on Scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // Mobile Menu Toggle
+  if (menuToggle && headerNav) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = headerNav.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close menu when clicking nav link
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        headerNav.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', false);
+      });
+    });
+  }
+
+  // ScrollSpy Active Nav Link
+  window.addEventListener('scroll', () => {
+    let currentId = '';
+    const scrollPosition = window.scrollY + 120;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        currentId = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      const href = link.getAttribute('href');
+      if (href === `#${currentId}`) {
+        link.classList.add('active');
+      }
+    });
+  }, { passive: true });
+}
+
+/* ==========================================================================
+   DESIGN PORTFOLIO MODULE & FILTER
+   ========================================================================== */
+function initDesignPortfolio(items = []) {
+  const container = document.getElementById('design-portfolio-grid');
+  const filterButtons = document.querySelectorAll('[data-filter-design]');
+  if (!container) return;
+
+  function render(filter = 'all') {
+    const filtered = (filter === 'all') 
+      ? items 
+      : items.filter(item => item.category.toLowerCase() === filter.toLowerCase());
+
+    if (filtered.length === 0) {
+      container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-light);">Không có dự án nào trong mục này.</div>`;
+      return;
+    }
+
+    container.innerHTML = filtered.map(item => `
+      <article class="portfolio-card fade-up-element" data-modal-type="design" data-id="${item.id}" tabindex="0" role="button" aria-label="Xem chi tiết ${item.title}">
+        <div class="portfolio-thumb-wrapper">
+          <img src="${item.image}" alt="${item.title}" class="portfolio-thumb" loading="lazy" />
+          <div class="portfolio-overlay">
+            <span class="portfolio-overlay-btn">🔍 Xem chi tiết</span>
+          </div>
+        </div>
+        <div class="portfolio-body">
+          <span class="portfolio-category-badge">${item.category}</span>
+          <h3 class="portfolio-title">${item.title}</h3>
+          <p class="portfolio-desc">${item.description}</p>
+        </div>
+      </article>
+    `).join('');
+
+    // Attach click events for lightbox
+    container.querySelectorAll('.portfolio-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const id = parseInt(card.dataset.id, 10);
+        const project = items.find(p => p.id === id);
+        if (project) openProjectModal(project, 'design');
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filterDesign;
+      render(filter);
+    });
+  });
+
+  render('all');
+}
+
+/* ==========================================================================
+   WEB PROJECTS SHOWCASE MODULE
+   ========================================================================== */
+function initWebProjects(items = []) {
+  const container = document.getElementById('web-projects-grid');
+  const filterButtons = document.querySelectorAll('[data-filter-web]');
+  if (!container) return;
+
+  function render(filter = 'all') {
+    const filtered = (filter === 'all')
+      ? items
+      : items.filter(item => item.category.toLowerCase() === filter.toLowerCase());
+
+    if (filtered.length === 0) {
+      container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-light);">Không có mẫu website nào trong mục này.</div>`;
+      return;
+    }
+
+    container.innerHTML = filtered.map(item => `
+      <article class="web-card fade-up-element">
+        <div class="browser-bar">
+          <span class="browser-dot red"></span>
+          <span class="browser-dot yellow"></span>
+          <span class="browser-dot green"></span>
+          <span class="browser-url-pill">${item.demoUrl || 'https://shopcoweb.vn'}</span>
+        </div>
+        <div class="web-thumb-wrapper">
+          <img src="${item.image}" alt="${item.title}" class="web-thumb" loading="lazy" />
+        </div>
+        <div class="web-card-body">
+          <span class="web-card-type">${item.type || item.category}</span>
+          <h3 class="web-card-title">${item.title}</h3>
+          <div class="web-card-tech">${item.tech}</div>
+          <p class="web-card-desc">${item.description}</p>
+          <div class="web-card-actions">
+            <button type="button" class="btn btn-outline-primary btn-sm btn-web-detail" data-id="${item.id}">Chi tiết</button>
+            <a href="#lien-he" class="btn btn-primary btn-sm">Tôi cần web này</a>
+          </div>
+        </div>
+      </article>
+    `).join('');
+
+    // Attach click events for detail modal
+    container.querySelectorAll('.btn-web-detail').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = parseInt(btn.dataset.id, 10);
+        const webItem = items.find(w => w.id === id);
+        if (webItem) openProjectModal(webItem, 'web');
+      });
+    });
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filterWeb;
+      render(filter);
+    });
+  });
+
+  render('all');
+}
+
+/* ==========================================================================
+   LIBRARY (GALLERY PHOTOS & LAZY YOUTUBE VIDEOS)
+   ========================================================================== */
+function initLibrary(galleryItems = [], videoItems = []) {
+  const tabButtons = document.querySelectorAll('.library-tab-btn');
+  const photosContainer = document.getElementById('library-photos-view');
+  const videosContainer = document.getElementById('library-videos-view');
+
+  if (photosContainer) {
+    photosContainer.innerHTML = galleryItems.map(item => `
+      <div class="gallery-item fade-up-element" data-id="${item.id}" role="button" tabindex="0" aria-label="${item.title}">
+        <div class="gallery-thumb-wrapper">
+          <img src="${item.image}" alt="${item.title}" class="gallery-thumb" loading="lazy" />
+        </div>
+        <div class="gallery-info">
+          <div class="gallery-tag">${item.category}</div>
+          <div class="gallery-title">${item.title}</div>
+        </div>
+      </div>
+    `).join('');
+
+    photosContainer.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const id = parseInt(item.dataset.id, 10);
+        const g = galleryItems.find(x => x.id === id);
+        if (g) openProjectModal({
+          title: g.title,
+          category: g.category,
+          image: g.image,
+          description: g.caption
+        }, 'gallery');
+      });
+    });
+  }
+
+  if (videosContainer) {
+    videosContainer.innerHTML = videoItems.map(item => `
+      <article class="video-card fade-up-element">
+        <div class="video-player-container" data-video-id="${item.videoId}" data-video-title="${item.title}" role="button" tabindex="0" aria-label="Phát video ${item.title}">
+          <img src="${item.thumbnail}" alt="${item.title}" class="video-thumb" loading="lazy" />
+          <div class="video-play-btn" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <span class="video-duration">${item.duration}</span>
+        </div>
+        <div class="video-body">
+          <div class="video-cat">${item.category}</div>
+          <h3 class="video-title">${item.title}</h3>
+          <p class="video-desc">${item.description}</p>
+        </div>
+      </article>
+    `).join('');
+
+    // Lazy load YouTube iframe inside modal only on click
+    videosContainer.querySelectorAll('.video-player-container').forEach(container => {
+      container.addEventListener('click', () => {
+        const videoId = container.dataset.videoId;
+        const title = container.dataset.videoTitle;
+        openVideoModal(videoId, title);
+      });
+    });
+  }
+
+  // Switch tabs
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      if (tab === 'photos') {
+        photosContainer.style.display = 'grid';
+        videosContainer.style.display = 'none';
+      } else {
+        photosContainer.style.display = 'none';
+        videosContainer.style.display = 'grid';
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   ARTICLES MODULE
+   ========================================================================== */
+function initArticles(articles = []) {
+  const container = document.getElementById('articles-grid');
+  if (!container) return;
+
+  container.innerHTML = articles.map(item => `
+    <article class="article-card fade-up-element" data-id="${item.id}" role="button" tabindex="0" aria-label="Đọc bài viết ${item.title}">
+      <div class="article-thumb-wrapper">
+        <img src="${item.image}" alt="${item.title}" class="article-thumb" loading="lazy" />
+      </div>
+      <div class="article-body">
+        <div class="article-meta">
+          <span class="article-category">${item.category}</span>
+          <span class="article-date">${item.date}</span>
+        </div>
+        <h3 class="article-title">${item.title}</h3>
+        <p class="article-desc">${item.description}</p>
+        <span class="article-readmore">Đọc tiếp →</span>
+      </div>
+    </article>
+  `).join('');
+
+  container.querySelectorAll('.article-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = parseInt(card.dataset.id, 10);
+      const article = articles.find(a => a.id === id);
+      if (article) {
+        openProjectModal({
+          title: article.title,
+          category: article.category + ' · ' + article.date,
+          image: article.image,
+          description: article.content || article.description
+        }, 'article');
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   CONTACT FORM VALIDATION & MOCK STORAGE
+   ========================================================================== */
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  const alertSuccess = document.getElementById('form-success-alert');
+  if (!form) return;
+
+  const fullnameInput = document.getElementById('fullname');
+  const phoneInput = document.getElementById('phone');
+  const emailInput = document.getElementById('email');
+  const serviceInput = document.getElementById('service-interest');
+  const messageInput = document.getElementById('message');
+
+  function validateField(input, condition) {
+    if (condition) {
+      input.classList.remove('is-invalid');
+      return true;
+    } else {
+      input.classList.add('is-invalid');
+      return false;
+    }
+  }
+
+  // Clear validation on input
+  [fullnameInput, phoneInput, emailInput, serviceInput].forEach(el => {
+    if (!el) return;
+    el.addEventListener('input', () => el.classList.remove('is-invalid'));
+    el.addEventListener('change', () => el.classList.remove('is-invalid'));
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const fullname = fullnameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    const email = emailInput ? emailInput.value.trim() : '';
+    const service = serviceInput.value;
+    const message = messageInput ? messageInput.value.trim() : '';
+
+    const isNameValid = validateField(fullnameInput, fullname.length >= 2);
+    // Vietnamese phone number validation (10 digits starting with 0 or +84)
+    const phoneRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
+    const isPhoneValid = validateField(phoneInput, phoneRegex.test(phone.replace(/\s+/g, '')));
+    
+    let isEmailValid = true;
+    if (email.length > 0) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      isEmailValid = validateField(emailInput, emailRegex.test(email));
+    }
+
+    const isServiceValid = validateField(serviceInput, service !== '');
+
+    if (isNameValid && isPhoneValid && isEmailValid && isServiceValid) {
+      // Mock save to localStorage
+      const newLead = {
+        fullname,
+        phone,
+        email,
+        service,
+        message,
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        const currentLeads = JSON.parse(localStorage.getItem('tbh_leads') || '[]');
+        currentLeads.push(newLead);
+        localStorage.setItem('tbh_leads', JSON.stringify(currentLeads));
+      } catch (err) {
+        console.log('Local storage save notice:', err);
+      }
+
+      // Display Success Alert
+      if (alertSuccess) {
+        alertSuccess.style.display = 'block';
+        alertSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      form.reset();
+
+      setTimeout(() => {
+        if (alertSuccess) alertSuccess.style.display = 'none';
+      }, 7000);
+    }
+  });
+}
+
+/* ==========================================================================
+   FLOATING MOBILE ACTION BAR (HIDE ON FOOTER)
+   ========================================================================== */
+function initFloatingMobileBar() {
+  const floatingBar = document.querySelector('.floating-mobile-bar');
+  const footer = document.querySelector('.site-footer');
+  if (!floatingBar || !footer) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        floatingBar.classList.add('hidden');
+      } else {
+        floatingBar.classList.remove('hidden');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observer.observe(footer);
+}
+
+/* ==========================================================================
+   MODAL & LIGHTBOX SYSTEM
+   ========================================================================== */
+let activeModalBackdrop = null;
+
+function initModalSystem() {
+  activeModalBackdrop = document.getElementById('global-modal');
+  const closeBtn = document.getElementById('modal-close-btn');
+
+  if (activeModalBackdrop && closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+    activeModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === activeModalBackdrop) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && activeModalBackdrop.classList.contains('open')) {
+        closeModal();
+      }
+    });
+  }
+}
+
+function openProjectModal(item, type = 'general') {
+  if (!activeModalBackdrop) return;
+
+  const modalBody = document.getElementById('modal-dynamic-content');
+  
+  let tagsHtml = '';
+  if (item.tags && Array.isArray(item.tags)) {
+    tagsHtml = `<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;">
+      ${item.tags.map(t => `<span class="role-tag">${t}</span>`).join('')}
+    </div>`;
+  }
+
+  let highlightsHtml = '';
+  if (item.highlights && Array.isArray(item.highlights)) {
+    highlightsHtml = `
+      <div style="margin-top: 20px;">
+        <strong style="font-size: 0.875rem; color: var(--text);">Điểm nổi bật:</strong>
+        <ul style="margin-top: 8px; list-style: disc; margin-left: 20px; font-size: 0.875rem; color: var(--text-muted);">
+          ${item.highlights.map(h => `<li style="margin-bottom: 4px;">${h}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  modalBody.innerHTML = `
+    <img src="${item.image}" alt="${item.title}" class="modal-image-preview" />
+    <div class="modal-body-content">
+      <div style="font-size: 0.8125rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">
+        ${item.category || ''} ${item.year ? '· ' + item.year : ''}
+      </div>
+      <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 12px; line-height: 1.3;">
+        ${item.title}
+      </h3>
+      ${item.tech ? `<div style="font-size: 0.8125rem; color: var(--text-light); margin-bottom: 12px; font-weight: 600;">Công nghệ: ${item.tech}</div>` : ''}
+      <p style="font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7;">
+        ${item.description}
+      </p>
+      ${highlightsHtml}
+      ${tagsHtml}
+      <div style="margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#lien-he" class="btn btn-primary btn-sm" onclick="closeModal()">Trao đổi về dự án này</a>
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeModal()">Đóng cửa sổ</button>
+      </div>
+    </div>
+  `;
+
+  activeModalBackdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openVideoModal(videoId, title) {
+  if (!activeModalBackdrop) return;
+  const modalBody = document.getElementById('modal-dynamic-content');
+
+  modalBody.innerHTML = `
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; border-radius: 16px 16px 0 0;">
+      <iframe 
+        style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border:0;"
+        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+        title="${title}"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="modal-body-content">
+      <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 10px;">${title}</h3>
+      <p style="font-size: 0.875rem; color: var(--text-light);">Video hướng dẫn chuyên đề từ giảng viên Trần Bá Hộ.</p>
+      <div style="margin-top: 20px;">
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeModal()">Đóng video</button>
+      </div>
+    </div>
+  `;
+
+  activeModalBackdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  if (!activeModalBackdrop) return;
+  activeModalBackdrop.classList.remove('open');
+  document.body.style.overflow = '';
+  // Clear iframe if open
+  setTimeout(() => {
+    const modalBody = document.getElementById('modal-dynamic-content');
+    if (modalBody) modalBody.innerHTML = '';
+  }, 250);
+}
+
+/* ==========================================================================
+   SCROLL FADE-UP ANIMATIONS (IntersectionObserver)
+   ========================================================================== */
+function initScrollAnimations() {
+  const elements = document.querySelectorAll('.fade-up-element');
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach(el => el.classList.add('in-view'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  elements.forEach(el => observer.observe(el));
+}
