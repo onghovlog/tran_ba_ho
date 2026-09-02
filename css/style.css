@@ -4,7 +4,7 @@
    Color Palette: Cam (#f58220) & Xanh dương (#1877f2)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
   /* Brand Colors */
@@ -35,7 +35,7 @@
   --danger: #ef4444;
   
   /* Typography */
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   
   /* Elevation & Shadows (Subtle, refined) */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

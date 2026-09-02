@@ -25,7 +25,7 @@ Website cá nhân kết hợp đa mục tiêu:
 - **Phong cách thị giác**: **Minimal + Premium + Modern**
   - Màu chủ đạo: Cam (`#f58220`) & Xanh dương điểm nhấn (`#1877f2`).
   - Nền: Trắng & Xám sáng (`#f8f9fb`).
-  - Typography: Google Font **Plus Jakarta Sans**.
+  - Typography: Google Font **Inter**.
   - Không gradient lòe loẹt, ưu tiên khoảng trắng, đường line tinh tế và số thứ tự trực quan.
 - **Tối ưu Mobile-First**:
   - Tương thích tối đa trên trình duyệt TikTok, Facebook, Safari, Chrome mobile.

@@ -35,18 +35,18 @@
     <!-- FPT Polytechnic Badge -->
     <rect x="50" y="370" width="400" height="70" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
     <rect x="65" y="385" width="40" height="40" rx="8" fill="#fff7ed"/>
-    <text x="75" y="411" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="900" fill="#f58220">FPT</text>
-    <text x="118" y="402" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800" fill="#1f2937">Cao Đẳng FPT Polytechnic</text>
-    <text x="118" y="422" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#6b7280">Giảng viên Thiết kế Đồ họa &amp; CNTT</text>
+    <text x="75" y="411" font-family="'Inter', sans-serif" font-size="20" font-weight="900" fill="#f58220">FPT</text>
+    <text x="118" y="402" font-family="'Inter', sans-serif" font-size="14" font-weight="800" fill="#1f2937">Cao Đẳng FPT Polytechnic</text>
+    <text x="118" y="422" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#6b7280">Giảng viên Thiết kế Đồ họa &amp; CNTT</text>
   </g>
 
   <!-- Bottom Pills -->
   <rect x="50" y="460" width="125" height="34" rx="17" fill="#ffffff" stroke="#e5e7eb"/>
-  <text x="70" y="482" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="#f58220">🎨 UI/UX &amp; Brand</text>
+  <text x="70" y="482" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#f58220">🎨 UI/UX &amp; Brand</text>
 
   <rect x="185" y="460" width="135" height="34" rx="17" fill="#ffffff" stroke="#e5e7eb"/>
-  <text x="202" y="482" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="#1877f2">💻 Web Developer</text>
+  <text x="202" y="482" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#1877f2">💻 Web Developer</text>
 
   <rect x="330" y="460" width="120" height="34" rx="17" fill="#ffffff" stroke="#e5e7eb"/>
-  <text x="345" y="482" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="#1f2937">📈 E-Commerce</text>
+  <text x="345" y="482" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#1f2937">📈 E-Commerce</text>
 </svg>
