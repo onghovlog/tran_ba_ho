@@ -284,6 +284,60 @@ const APP_DATA = {
       "image": "assets/images/article-06.svg",
       "description": "Bí quyết tinh gọn JavaScript thuần, nén ảnh SVG/WebP và cấu trúc CSS chuẩn không cần thư viện cồng kềnh.",
       "content": "Tốc độ tải trang ảnh hưởng trực tiếp đến tỉ lệ chuyển đổi đơn hàng và thứ hạng Google. Bằng cách loại bỏ các framework thừa thãi, tải chậm YouTube iframe và tối ưu CSS Variables, website của bạn sẽ mở ra ngay lập tức trên cả kết nối 4G yếu."
+    },
+    {
+      "id": 7,
+      "title": "Quy tắc tỷ lệ vàng và bố cục phân cấp trong UI/UX hiện đại",
+      "category": "Thiết kế",
+      "date": "22/01/2026",
+      "image": "assets/images/article-01.svg",
+      "description": "Cách áp dụng hệ thống lưới 8pt và nhịp điệu thị giác giúp người dùng tiếp nhận thông tin dễ dàng nhất.",
+      "content": "Bố cục trực quan giúp định hướng mắt người nhìn một cách tự nhiên. Khi thiết kế trang đích, việc phân cấp tiêu đề, khoảng trắng và màu sắc nút CTA theo thứ tự ưu tiên sẽ gia tăng rõ rệt thời gian onsite của khách hàng."
+    },
+    {
+      "id": 8,
+      "title": "Xây dựng thương hiệu cá nhân bền vững cho Freelancer và Giảng viên",
+      "category": "Kinh doanh",
+      "date": "15/01/2026",
+      "image": "assets/images/article-04.svg",
+      "description": "Hành trình định vị chuyên môn và tạo dựng tệp khách hàng trung thành từ chính những giá trị thật.",
+      "content": "Thương hiệu cá nhân không phải là phô trương mà là sự nhất quán trong chất lượng sản phẩm và thái độ phục vụ. Một website cá nhân chuyên nghiệp là bằng chứng thuyết phục nhất khẳng định năng lực của bạn."
+    },
+    {
+      "id": 9,
+      "title": "Tổng quan các xu hướng Web Design thống trị năm 2026",
+      "category": "Website",
+      "date": "10/01/2026",
+      "image": "assets/images/article-02.svg",
+      "description": "Minimalism cao cấp, typography biểu cảm và tốc độ phản hồi siêu nhanh đang dẫn đầu trải nghiệm số.",
+      "content": "Người dùng ngày càng thiếu kiên nhẫn với các hiệu ứng nặng nề. Xu hướng hiện nay quay về với sự tối giản sang trọng: kiểu chữ sắc nét, khoảng trắng hào phóng và điều hướng mượt mà không độ trễ."
+    },
+    {
+      "id": 10,
+      "title": "Phương pháp tự học lập trình Frontend hiệu quả cho Designer",
+      "category": "Giảng dạy",
+      "date": "04/01/2026",
+      "image": "assets/images/article-05.svg",
+      "description": "Lộ trình từ hiểu biết cơ bản về HTML/CSS đến làm chủ Flexbox, Grid và JavaScript DOM tương tác.",
+      "content": "Một Designer biết viết code sẽ có lợi thế vượt trội khi làm việc với lập trình viên và hiện thực hóa đúng 100% bản vẽ thiết kế. Hãy bắt đầu từ việc clone lại các giao diện đẹp bằng CSS thuần trước khi học framework."
+    },
+    {
+      "id": 11,
+      "title": "Chiến lược nội dung thu hút khách hàng tiềm năng qua Landing Page",
+      "category": "Kinh doanh",
+      "date": "28/12/2025",
+      "image": "assets/images/article-03.svg",
+      "description": "Công thức viết Headline và Micro-copy chạm đúng nỗi đau của khách hàng để kích hoạt hành động mua.",
+      "content": "Khách hàng không mua tính năng, họ mua kết quả. Hãy nói về lợi ích thực tế mà sản phẩm mang lại và đưa ra bằng chứng xác thực (social proof) ngay trước các nút bấm kêu gọi hành động."
+    },
+    {
+      "id": 12,
+      "title": "Tích hợp Generative AI vào quy trình sáng tạo: Cơ hội hay thách thức?",
+      "category": "AI",
+      "date": "20/12/2025",
+      "image": "assets/images/article-06.svg",
+      "description": "Phân tích vai trò của AI như một cộng sự đắc lực giúp người làm sáng tạo bứt phá giới hạn.",
+      "content": "AI xử lý các tác vụ lặp đi lặp lại để bạn dành trọn tâm huyết cho tư duy chiến lược và cảm xúc nghệ thuật. Làm chủ công nghệ mới chính là chìa khóa để phát triển nghề nghiệp lâu dài."
     }
   ],
   "gallery": [

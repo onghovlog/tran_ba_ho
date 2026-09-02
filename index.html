@@ -537,9 +537,22 @@
           </p>
         </div>
 
-        <!-- Articles Grid Container -->
-        <div class="articles-grid" id="articles-grid">
-          <!-- Rendered via JavaScript from db.json -->
+        <!-- Articles Slider Carousel (6 boxes per slide) -->
+        <div class="articles-slider-wrapper" id="articles-slider-wrapper">
+          <div class="articles-carousel-track" id="articles-carousel-track">
+            <!-- Dynamically rendered slides via JavaScript (6 boxes per slide) -->
+          </div>
+
+          <!-- Slider Controls -->
+          <div class="slider-controls" id="articles-slider-controls">
+            <button type="button" class="slider-nav-btn prev-btn" id="articles-prev-btn" aria-label="Slide tin tức trước">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="slider-dots" id="articles-slider-dots"></div>
+            <button type="button" class="slider-nav-btn next-btn" id="articles-next-btn" aria-label="Slide tin tức tiếp theo">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>

@@ -402,30 +402,50 @@ function initLibrary(galleryItems = [], videoItems = []) {
 }
 
 /* ==========================================================================
-   ARTICLES MODULE
+   ARTICLES MODULE (SLIDER CAROUSEL - 6 BOXES PER SLIDE)
    ========================================================================== */
 function initArticles(articles = []) {
-  const container = document.getElementById('articles-grid');
-  if (!container) return;
+  const articlesTrack = document.getElementById('articles-carousel-track');
+  const articlesDots = document.getElementById('articles-slider-dots');
+  const articlesPrevBtn = document.getElementById('articles-prev-btn');
+  const articlesNextBtn = document.getElementById('articles-next-btn');
 
-  container.innerHTML = articles.map(item => `
-    <article class="article-card fade-up-element" data-id="${item.id}" role="button" tabindex="0" aria-label="Đọc bài viết ${item.title}">
-      <div class="article-thumb-wrapper">
-        <img src="${item.image}" alt="${item.title}" class="article-thumb" loading="lazy" />
-      </div>
-      <div class="article-body">
-        <div class="article-meta">
-          <span class="article-category">${item.category}</span>
-          <span class="article-date">${item.date}</span>
-        </div>
-        <h3 class="article-title">${item.title}</h3>
-        <p class="article-desc">${item.description}</p>
-        <span class="article-readmore">Đọc tiếp →</span>
-      </div>
-    </article>
+  if (!articlesTrack) return;
+
+  function chunkArray(array, size) {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += size) {
+      chunks.push(array.slice(i, i + size));
+    }
+    return chunks.length > 0 ? chunks : [[]];
+  }
+
+  // Chunk articles into 6 items per slide
+  const articleSlides = chunkArray(articles, 6);
+
+  articlesTrack.innerHTML = articleSlides.map(slideItems => `
+    <div class="articles-slide-grid">
+      ${slideItems.map(item => `
+        <article class="article-card fade-up-element" data-id="${item.id}" role="button" tabindex="0" aria-label="Đọc bài viết ${item.title}">
+          <div class="article-thumb-wrapper">
+            <img src="${item.image}" alt="${item.title}" class="article-thumb" loading="lazy" />
+          </div>
+          <div class="article-body">
+            <div class="article-meta">
+              <span class="article-category">${item.category}</span>
+              <span class="article-date">${item.date}</span>
+            </div>
+            <h3 class="article-title">${item.title}</h3>
+            <p class="article-desc">${item.description}</p>
+            <span class="article-readmore">Đọc tiếp →</span>
+          </div>
+        </article>
+      `).join('')}
+    </div>
   `).join('');
 
-  container.querySelectorAll('.article-card').forEach(card => {
+  // Attach click events for modal
+  articlesTrack.querySelectorAll('.article-card').forEach(card => {
     card.addEventListener('click', () => {
       const id = parseInt(card.dataset.id, 10);
       const article = articles.find(a => a.id === id);
@@ -438,7 +458,70 @@ function initArticles(articles = []) {
         }, 'article');
       }
     });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
   });
+
+  // Setup slider pagination
+  let currentSlide = 0;
+  const slidesCount = articleSlides.length;
+
+  function goToSlide(index) {
+    if (index < 0) index = 0;
+    if (index >= slidesCount) index = slidesCount - 1;
+    currentSlide = index;
+
+    articlesTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    // Update Dots
+    if (articlesDots) {
+      const dots = articlesDots.querySelectorAll('.slider-dot-btn');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlide);
+      });
+    }
+
+    // Update Prev / Next buttons
+    if (articlesPrevBtn) articlesPrevBtn.disabled = currentSlide === 0;
+    if (articlesNextBtn) articlesNextBtn.disabled = currentSlide === slidesCount - 1;
+  }
+
+  // Build Dots
+  if (articlesDots) {
+    articlesDots.innerHTML = '';
+    for (let i = 0; i < slidesCount; i++) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = `slider-dot-btn ${i === 0 ? 'active' : ''}`;
+      dot.setAttribute('aria-label', `Chuyển tới slide tin tức ${i + 1}`);
+      dot.addEventListener('click', () => goToSlide(i));
+      articlesDots.appendChild(dot);
+    }
+  }
+
+  if (articlesPrevBtn) {
+    articlesPrevBtn.onclick = () => goToSlide(currentSlide - 1);
+  }
+  if (articlesNextBtn) {
+    articlesNextBtn.onclick = () => goToSlide(currentSlide + 1);
+  }
+
+  // Hide controls if only 1 slide
+  if (slidesCount <= 1) {
+    if (articlesPrevBtn) articlesPrevBtn.style.display = 'none';
+    if (articlesNextBtn) articlesNextBtn.style.display = 'none';
+    if (articlesDots) articlesDots.style.display = 'none';
+  } else {
+    if (articlesPrevBtn) articlesPrevBtn.style.display = 'flex';
+    if (articlesNextBtn) articlesNextBtn.style.display = 'flex';
+    if (articlesDots) articlesDots.style.display = 'flex';
+  }
+
+  goToSlide(0);
 }
 
 /* ==========================================================================

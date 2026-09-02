@@ -317,10 +317,11 @@
     height: 36px;
   }
 
-  /* Articles */
-  .articles-grid {
+  /* Articles Slider */
+  .articles-slide-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-rows: auto;
+    gap: 16px;
   }
 
   /* Mid CTA */
@@ -419,9 +420,9 @@
     gap: 16px;
   }
 
-  .articles-grid {
+  .articles-slide-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 20px;
   }
 
   .contact-layout {
