@@ -417,6 +417,10 @@ ul, ol {
   align-items: center;
 }
 
+.hero-content {
+  padding-left: 50px;
+}
+
 .hero-meta-badge {
   display: inline-flex;
   align-items: center;
