@@ -381,13 +381,33 @@ ul, ol {
 }
 
 /* ==========================================================================
-   HERO BANNER
+   HERO BANNER (SLIDER CAROUSEL)
    ========================================================================== */
 .hero-section {
-  padding-top: 64px;
-  padding-bottom: 80px;
+  padding-top: 36px;
+  padding-bottom: 56px;
   background-color: var(--bg-main);
+  position: relative;
   overflow: hidden;
+}
+
+.hero-slider-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-carousel-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slide-item {
+  width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 16px 0 32px;
 }
 
 .hero-grid {
@@ -485,6 +505,147 @@ ul, ol {
 .hero-visual-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-card-hover);
+}
+
+.hero-visual-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Video Card in Hero */
+.hero-video-card {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background-color: #111827;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hero-video-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.hero-video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.hero-video-card:hover .hero-video-thumb {
+  transform: scale(1.04);
+}
+
+.hero-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(245, 130, 32, 0.6);
+  transition: var(--transition);
+}
+
+.hero-video-card:hover .hero-video-play {
+  transform: translate(-50%, -50%) scale(1.15);
+  background-color: var(--primary-dark);
+}
+
+.hero-video-duration {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background-color: rgba(17, 24, 39, 0.85);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* Hero Side Navigation Arrows (2 bên) */
+.hero-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transition: var(--transition);
+}
+
+.hero-prev-arrow {
+  left: 18px;
+}
+
+.hero-next-arrow {
+  right: 18px;
+}
+
+.hero-nav-arrow:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(245, 130, 32, 0.45);
+}
+
+/* Hero Dots */
+.hero-dots-container {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 20;
+}
+
+.hero-dot-btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--border);
+  border: none;
+  padding: 0;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.hero-dot-btn:hover {
+  background-color: var(--text-light);
+}
+
+.hero-dot-btn.active {
+  background-color: var(--primary);
+  width: 28px;
+  border-radius: var(--radius-full);
 }
 
 /* ==========================================================================

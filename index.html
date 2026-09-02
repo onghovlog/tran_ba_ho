@@ -79,45 +79,63 @@
        ========================================================================== -->
   <main id="main-content">
 
-    <!-- HERO BANNER -->
-    <section class="section hero-section" id="hero">
-      <div class="container">
-        <div class="hero-grid">
-          <div class="hero-content">
-            <div class="hero-meta-badge">
-              <span class="dot"></span>
-              <span>SHOP CÓ WEB &amp; GIẢI PHÁP SỐ TOÀN DIỆN</span>
-            </div>
-            
-            <h1 class="hero-headline">
-              Kinh doanh mà <br />
-              <span class="text-highlight">chưa có web?</span>
-            </h1>
+    <!-- HERO BANNER (SLIDER CAROUSEL) -->
+    <section class="section hero-section" id="hero" aria-label="Banner nổi bật">
+      <div class="hero-slider-wrapper" id="hero-slider-wrapper">
+        <!-- 2 Side Navigation Arrows -->
+        <button type="button" class="hero-nav-arrow hero-prev-arrow" id="hero-prev-btn" aria-label="Slide trước">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button type="button" class="hero-nav-arrow hero-next-arrow" id="hero-next-btn" aria-label="Slide tiếp theo">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
 
-            <p class="hero-subheadline">
-              Từ thiết kế thương hiệu đến xây dựng website – tôi giúp bạn tạo một hình ảnh kinh doanh chuyên nghiệp hơn trên Internet. 
-              <strong>Thiết kế đẹp để khách nhớ. Website tốt để khách mua.</strong>
-            </p>
+        <div class="hero-carousel-track" id="hero-carousel-track">
+          <!-- Slide 1: Default initial static markup for SEO and instant render -->
+          <div class="hero-slide-item">
+            <div class="container">
+              <div class="hero-grid">
+                <div class="hero-content">
+                  <div class="hero-meta-badge">
+                    <span class="dot"></span>
+                    <span>SHOP CÓ WEB &amp; GIẢI PHÁP SỐ TOÀN DIỆN</span>
+                  </div>
+                  
+                  <h1 class="hero-headline">
+                    Kinh doanh mà <br />
+                    <span class="text-highlight">chưa có web?</span>
+                  </h1>
 
-            <div class="hero-ctas">
-              <a href="#mau-website" class="btn btn-primary btn-lg">Xem mẫu website</a>
-              <a href="#lien-he" class="btn btn-outline btn-lg">Trao đổi cùng tôi</a>
-            </div>
+                  <p class="hero-subheadline">
+                    Từ thiết kế thương hiệu đến xây dựng website – tôi giúp bạn tạo một hình ảnh kinh doanh chuyên nghiệp hơn trên Internet. 
+                    <strong>Thiết kế đẹp để khách nhớ. Website tốt để khách mua.</strong>
+                  </p>
 
-            <div class="hero-roles">
-              <span class="role-tag">Giảng viên TKĐH &amp; CNTT</span>
-              <span class="role-tag">Designer</span>
-              <span class="role-tag">Web Developer</span>
-              <span class="role-tag">Online Business</span>
-            </div>
-          </div>
+                  <div class="hero-ctas">
+                    <a href="#mau-website" class="btn btn-primary btn-lg">Xem mẫu website</a>
+                    <a href="#lien-he" class="btn btn-outline btn-lg">Trao đổi cùng tôi</a>
+                  </div>
 
-          <div class="hero-visual">
-            <div class="hero-visual-card">
-              <img src="assets/images/hero-visual.svg" alt="Minh hoạ website và ứng dụng di động chuẩn UI/UX" width="700" height="520" />
+                  <div class="hero-roles">
+                    <span class="role-tag">Giảng viên TKĐH &amp; CNTT</span>
+                    <span class="role-tag">Designer</span>
+                    <span class="role-tag">Web Developer</span>
+                    <span class="role-tag">Online Business</span>
+                  </div>
+                </div>
+
+                <div class="hero-visual">
+                  <div class="hero-visual-card">
+                    <img src="assets/images/hero-visual.svg" alt="Minh hoạ website và ứng dụng di động chuẩn UI/UX" width="700" height="520" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- Dot Indicators -->
+        <div class="hero-dots-container" id="hero-dots"></div>
       </div>
     </section>
 

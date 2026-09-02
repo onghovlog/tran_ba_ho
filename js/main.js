@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   // 2. Initialize Core Modules
   initHeaderAndNav();
+  initHeroSlider(data.heroSlides);
   initDesignPortfolio(data.designPortfolio);
   initWebProjects(data.webProjects);
   initLibrary(data.gallery, data.youtubeVideos);
@@ -18,6 +19,207 @@ document.addEventListener('DOMContentLoaded', async () => {
   initScrollAnimations();
   initModalSystem();
 });
+
+/* ==========================================================================
+   HERO BANNER SLIDER MODULE (AUTOPLAY 2S, THEMES, VIDEO, SIDE ARROWS)
+   ========================================================================== */
+function initHeroSlider(slides = []) {
+  const track = document.getElementById('hero-carousel-track');
+  const dotsContainer = document.getElementById('hero-dots');
+  const prevBtn = document.getElementById('hero-prev-btn');
+  const nextBtn = document.getElementById('hero-next-btn');
+  const wrapper = document.getElementById('hero-slider-wrapper');
+
+  if (!track || !slides || slides.length === 0) return;
+
+  // Render slides dynamically
+  track.innerHTML = slides.map(slide => {
+    let rightVisualHtml = '';
+    if (slide.type === 'content_video') {
+      rightVisualHtml = `
+        <div class="hero-visual">
+          <div class="hero-video-card" data-video-id="${slide.videoId}" data-video-title="${slide.videoTitle || ''}" role="button" tabindex="0" aria-label="Phát video ${slide.videoTitle || ''}">
+            <img src="${slide.videoThumb || 'assets/images/video-01.svg'}" alt="${slide.videoTitle || ''}" class="hero-video-thumb" loading="lazy" />
+            <div class="hero-video-play" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            ${slide.videoDuration ? `<span class="hero-video-duration">${slide.videoDuration}</span>` : ''}
+          </div>
+        </div>
+      `;
+    } else {
+      rightVisualHtml = `
+        <div class="hero-visual">
+          <div class="hero-visual-card">
+            <img src="${slide.image}" alt="${slide.imageAlt || ''}" class="hero-visual-img" width="700" height="520" loading="eager" />
+          </div>
+        </div>
+      `;
+    }
+
+    const rolesHtml = slide.roles && slide.roles.length > 0 ? `
+      <div class="hero-roles">
+        ${slide.roles.map(r => `<span class="role-tag">${r}</span>`).join('')}
+      </div>
+    ` : '';
+
+    return `
+      <div class="hero-slide-item">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content">
+              ${slide.badge ? `
+                <div class="hero-meta-badge">
+                  <span class="dot"></span>
+                  <span>${slide.badge}</span>
+                </div>
+              ` : ''}
+              
+              <h1 class="hero-headline">
+                ${slide.title}
+              </h1>
+
+              <p class="hero-subheadline">
+                ${slide.description}
+              </p>
+
+              <div class="hero-ctas">
+                ${slide.primaryBtn ? `<a href="${slide.primaryBtn.link}" class="btn btn-primary btn-lg">${slide.primaryBtn.text}</a>` : ''}
+                ${slide.secondaryBtn ? `<a href="${slide.secondaryBtn.link}" class="btn btn-outline btn-lg">${slide.secondaryBtn.text}</a>` : ''}
+              </div>
+
+              ${rolesHtml}
+            </div>
+
+            ${rightVisualHtml}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Attach video click listeners if any video in hero slides
+  track.querySelectorAll('.hero-video-card').forEach(videoCard => {
+    videoCard.addEventListener('click', () => {
+      const videoId = videoCard.dataset.videoId;
+      const title = videoCard.dataset.videoTitle;
+      if (typeof openVideoModal === 'function') {
+        openVideoModal(videoId, title);
+      }
+    });
+    videoCard.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        videoCard.click();
+      }
+    });
+  });
+
+  let currentSlide = 0;
+  const slidesCount = slides.length;
+  const AUTOPLAY_DELAY = 2000; // 2 seconds autoplay
+  let autoplayTimer = null;
+
+  function goToSlide(index) {
+    if (index < 0) {
+      currentSlide = slidesCount - 1;
+    } else if (index >= slidesCount) {
+      currentSlide = 0;
+    } else {
+      currentSlide = index;
+    }
+
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    // Update Dots
+    if (dotsContainer) {
+      const dots = dotsContainer.querySelectorAll('.hero-dot-btn');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlide);
+      });
+    }
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(() => {
+      goToSlide(currentSlide + 1);
+    }, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  // Build Dots
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < slidesCount; i++) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = `hero-dot-btn ${i === 0 ? 'active' : ''}`;
+      dot.setAttribute('aria-label', `Chuyển tới slide ${i + 1}`);
+      dot.addEventListener('click', () => {
+        goToSlide(i);
+        resetAutoplay();
+      });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      goToSlide(currentSlide - 1);
+      resetAutoplay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      goToSlide(currentSlide + 1);
+      resetAutoplay();
+    });
+  }
+
+  // Pause on hover
+  if (wrapper) {
+    wrapper.addEventListener('mouseenter', stopAutoplay);
+    wrapper.addEventListener('mouseleave', startAutoplay);
+  }
+
+  // Touch Swipe Support for Mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    stopAutoplay();
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diffX = touchStartX - touchEndX;
+    if (Math.abs(diffX) > 45) {
+      if (diffX > 0) {
+        goToSlide(currentSlide + 1);
+      } else {
+        goToSlide(currentSlide - 1);
+      }
+    }
+    startAutoplay();
+  }, { passive: true });
+
+  goToSlide(0);
+  startAutoplay();
+}
 
 /* ==========================================================================
    NAVIGATION, STICKY HEADER & SCROLLSPY

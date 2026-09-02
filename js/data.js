@@ -15,6 +15,102 @@ const APP_DATA = {
     "messenger": "https://m.me/tranbaho",
     "location": "TP. Hồ Chí Minh, Việt Nam"
   },
+  "heroSlides": [
+    {
+      "id": 1,
+      "type": "content_image",
+      "badge": "SHOP CÓ WEB & GIẢI PHÁP SỐ TOÀN DIỆN",
+      "title": "Kinh doanh mà <br /><span class=\"text-highlight\">chưa có web?</span>",
+      "description": "Từ thiết kế thương hiệu đến xây dựng website – tôi giúp bạn tạo một hình ảnh kinh doanh chuyên nghiệp hơn trên Internet. <strong>Thiết kế đẹp để khách nhớ. Website tốt để khách mua.</strong>",
+      "primaryBtn": {
+        "text": "Xem mẫu website",
+        "link": "#mau-website"
+      },
+      "secondaryBtn": {
+        "text": "Trao đổi cùng tôi",
+        "link": "#lien-he"
+      },
+      "roles": [
+        "Giảng viên TKĐH & CNTT",
+        "Designer",
+        "Web Developer",
+        "Online Business"
+      ],
+      "image": "assets/images/hero-visual.svg",
+      "imageAlt": "Minh hoạ website và ứng dụng di động chuẩn UI/UX"
+    },
+    {
+      "id": 2,
+      "type": "content_image",
+      "badge": "THIẾT KẾ ĐỒ HỌA & NHẬN DIỆN THƯƠNG HIỆU",
+      "title": "Định hình thương hiệu <br /><span class=\"text-highlight\">sang trọng & độc bản</span>",
+      "description": "Hơn 8 năm kinh nghiệm thiết kế Logo, Brand Guidelines, bao bì sản phẩm và ấn phẩm truyền thông đa kênh giúp doanh nghiệp khẳng định vị thế dẫn đầu.",
+      "primaryBtn": {
+        "text": "Xem portfolio thiết kế",
+        "link": "#portfolio-thiet-ke"
+      },
+      "secondaryBtn": {
+        "text": "Tư vấn thiết kế",
+        "link": "#lien-he"
+      },
+      "roles": [
+        "Logo Design",
+        "Brand Guidelines",
+        "Packaging",
+        "Social Media"
+      ],
+      "image": "assets/images/service-graphic.svg",
+      "imageAlt": "Thiết kế đồ họa và bộ nhận diện thương hiệu chuyên nghiệp"
+    },
+    {
+      "id": 3,
+      "type": "content_video",
+      "badge": "VIDEO CHIA SẺ & ĐÀO TẠO THỰC CHIẾN",
+      "title": "Học thiết kế & lập trình <br /><span class=\"text-highlight\">cùng Trần Bá Hộ</span>",
+      "description": "Video bài giảng trực quan, đúc kết từ thực tế giảng dạy tại Cao đẳng FPT Polytechnic và triển khai hàng trăm dự án thương mại thực chiến.",
+      "primaryBtn": {
+        "text": "Xem video YouTube",
+        "link": "#thu-vien"
+      },
+      "secondaryBtn": {
+        "text": "Khám phá thư viện",
+        "link": "#thu-vien"
+      },
+      "roles": [
+        "FPT Polytechnic",
+        "Figma UI/UX",
+        "Frontend Code",
+        "AI Creator"
+      ],
+      "videoId": "dQw4w9WgXcQ",
+      "videoTitle": "Hướng Dẫn Thiết Kế Giao Diện UI/UX Bằng Figma Cơ Bản Đến Nâng Cao",
+      "videoThumb": "assets/images/video-01.svg",
+      "videoDuration": "24:15"
+    },
+    {
+      "id": 4,
+      "type": "content_image",
+      "badge": "CƠ HỘI KINH DOANH ONLINE TINH GỌN",
+      "title": "Sở hữu siêu thị online <br /><span class=\"text-highlight\">với 3.000+ sản phẩm</span>",
+      "description": "Mô hình Dropshipping cùng Droppii: Không lo vốn ôm hàng, không tự đóng gói giao hàng, đồng hành hướng dẫn 1-1 cách xây dựng kênh tiếp thị đa kênh hiệu quả.",
+      "primaryBtn": {
+        "text": "Khám phá Droppii",
+        "link": "#kinh-doanh"
+      },
+      "secondaryBtn": {
+        "text": "Đăng ký đồng hành",
+        "link": "#lien-he"
+      },
+      "roles": [
+        "Dropshipping",
+        "Không vốn nhập",
+        "App tự động",
+        "Đồng hành 1-1"
+      ],
+      "image": "assets/images/droppii-business.svg",
+      "imageAlt": "Hệ sinh thái kinh doanh online Droppii"
+    }
+  ],
   "designPortfolio": [
     {
       "id": 1,
