@@ -301,16 +301,16 @@ function initDesignPortfolio(items = []) {
           if (tags.includes(rawFilter)) return true;
           
           if (rawFilter === 'sự kiện' || rawFilter === 'su kien' || rawFilter === 'event') {
-            return cat === 'sự kiện' || tags.some(t => t.includes('sự kiện') || t.includes('event') || t.includes('key visual') || t.includes('poster'));
+            return cat.includes('sự kiện') || cat.includes('event') || tags.some(t => t.includes('sự kiện') || t.includes('event') || t.includes('key visual') || t.includes('poster'));
           }
           if (rawFilter === 'social' || rawFilter === 'social media') {
-            return cat === 'social' || tags.some(t => t.includes('social') || t.includes('post') || t.includes('feed') || t.includes('story'));
+            return cat.includes('social') || tags.some(t => t.includes('social') || t.includes('post') || t.includes('feed') || t.includes('story'));
           }
           if (rawFilter === 'branding' || rawFilter === 'thương hiệu') {
-            return cat === 'branding' || tags.some(t => t.includes('branding') || t.includes('brand') || t.includes('guidelines') || t.includes('packaging'));
+            return cat.includes('branding') || tags.some(t => t.includes('branding') || t.includes('brand') || t.includes('guidelines') || t.includes('packaging'));
           }
           if (rawFilter === 'logo') {
-            return cat === 'logo' || tags.some(t => t.includes('logo') || t.includes('icon'));
+            return cat.includes('logo') || tags.some(t => t.includes('logo') || t.includes('icon'));
           }
           return false;
         });
@@ -321,7 +321,7 @@ function initDesignPortfolio(items = []) {
     }
 
     container.innerHTML = filtered.map(item => `
-      <article class="portfolio-card fade-up-element" data-modal-type="design" data-id="${item.id}" tabindex="0" role="button" aria-label="Xem chi tiết ${item.title}">
+      <article class="portfolio-card fade-up-element in-view" data-modal-type="design" data-id="${item.id}" tabindex="0" role="button" aria-label="Xem chi tiết ${item.title}">
         <div class="portfolio-thumb-wrapper">
           <img src="${item.image}" alt="${item.title}" class="portfolio-thumb" loading="lazy" />
           <div class="portfolio-overlay">
@@ -356,7 +356,7 @@ function initDesignPortfolio(items = []) {
     btn.addEventListener('click', () => {
       filterButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const filter = btn.dataset.filterDesign;
+      const filter = btn.dataset.filterDesign || btn.getAttribute('data-filter-design');
       render(filter);
     });
   });
@@ -375,7 +375,7 @@ function initWebProjects(items = []) {
   function render(filter = 'all') {
     const filtered = (filter === 'all')
       ? items
-      : items.filter(item => item.category.toLowerCase() === filter.toLowerCase());
+      : items.filter(item => (item.category || '').toLowerCase() === filter.toLowerCase() || (item.type || '').toLowerCase() === filter.toLowerCase());
 
     if (filtered.length === 0) {
       container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-light);">Không có mẫu website nào trong mục này.</div>`;
@@ -383,7 +383,7 @@ function initWebProjects(items = []) {
     }
 
     container.innerHTML = filtered.map(item => `
-      <article class="web-card fade-up-element">
+      <article class="web-card fade-up-element in-view">
         <div class="browser-bar">
           <span class="browser-dot red"></span>
           <span class="browser-dot yellow"></span>
