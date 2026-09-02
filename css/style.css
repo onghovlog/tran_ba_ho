@@ -1249,10 +1249,29 @@ ol {
   margin-top: 2px;
 }
 
+.shop-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .shop-visual-wrapper {
-  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 500px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.shop-visual-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+.shop-visual-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 /* ==========================================================================
