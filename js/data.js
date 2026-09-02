@@ -170,7 +170,27 @@ const APP_DATA = {
       "description": "Cẩm nang quy chuẩn sử dụng logo, màu sắc, font chữ và phong cách hình ảnh toàn diện.",
       "client": "Zenith Creative",
       "year": "2025",
-      "tags": ["Brandbook", "Guidelines", "Color System"]
+      "tags": ["Branding", "Brandbook", "Guidelines", "Color System"]
+    },
+    {
+      "id": 7,
+      "title": "Design Expo & Workshop 2026",
+      "category": "Sự kiện",
+      "image": "assets/images/design-07.svg",
+      "description": "Bộ ấn phẩm toàn diện gồm poster sự kiện, backdrop sân khấu và standee triển lãm sáng tạo.",
+      "client": "FPT Polytechnic Creativity Hub",
+      "year": "2026",
+      "tags": ["Sự kiện", "Workshop", "Poster", "Backdrop"]
+    },
+    {
+      "id": 8,
+      "title": "Kairos Fashion Social Campaign",
+      "category": "Social",
+      "image": "assets/images/design-08.svg",
+      "description": "Hệ thống template bài đăng mạng xã hội, story TikTok và banner quảng cáo chuyển đổi cao.",
+      "client": "Kairos Fashion Vietnam",
+      "year": "2026",
+      "tags": ["Social", "Social Media", "Post Template", "Campaign"]
     }
   ],
   "webProjects": [

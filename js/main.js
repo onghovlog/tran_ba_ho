@@ -290,9 +290,30 @@ function initDesignPortfolio(items = []) {
   if (!container) return;
 
   function render(filter = 'all') {
-    const filtered = (filter === 'all') 
+    const rawFilter = (filter || 'all').toLowerCase().trim();
+    const filtered = (rawFilter === 'all') 
       ? items 
-      : items.filter(item => item.category.toLowerCase() === filter.toLowerCase());
+      : items.filter(item => {
+          const cat = (item.category || '').toLowerCase().trim();
+          const tags = Array.isArray(item.tags) ? item.tags.map(t => t.toLowerCase().trim()) : [];
+          
+          if (cat === rawFilter) return true;
+          if (tags.includes(rawFilter)) return true;
+          
+          if (rawFilter === 'sự kiện' || rawFilter === 'su kien' || rawFilter === 'event') {
+            return cat === 'sự kiện' || tags.some(t => t.includes('sự kiện') || t.includes('event') || t.includes('key visual') || t.includes('poster'));
+          }
+          if (rawFilter === 'social' || rawFilter === 'social media') {
+            return cat === 'social' || tags.some(t => t.includes('social') || t.includes('post') || t.includes('feed') || t.includes('story'));
+          }
+          if (rawFilter === 'branding' || rawFilter === 'thương hiệu') {
+            return cat === 'branding' || tags.some(t => t.includes('branding') || t.includes('brand') || t.includes('guidelines') || t.includes('packaging'));
+          }
+          if (rawFilter === 'logo') {
+            return cat === 'logo' || tags.some(t => t.includes('logo') || t.includes('icon'));
+          }
+          return false;
+        });
 
     if (filtered.length === 0) {
       container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-light);">Không có dự án nào trong mục này.</div>`;
