@@ -117,7 +117,7 @@ function initHeroSlider(slides = []) {
 
   let currentSlide = 0;
   const slidesCount = slides.length;
-  const AUTOPLAY_DELAY = 2000; // 2 seconds autoplay
+  const AUTOPLAY_DELAY = 5000; // 5 seconds autoplay as requested
   let autoplayTimer = null;
 
   function goToSlide(index) {
