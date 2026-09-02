@@ -957,9 +957,19 @@ function initContactForm() {
 
         form.reset();
 
+        // Tự động mở Zalo chat trong tab mới sau 1 giây
+        setTimeout(() => {
+          try {
+            window.open('https://zalo.me/0918326706', '_blank');
+          } catch (e) {
+            console.log('Popup prevented, user can click button:', e);
+          }
+        }, 1200);
+
+        // Ẩn thông báo sau 20 giây để khách có đủ thời gian bấm nút Zalo nếu muốn
         setTimeout(() => {
           if (alertSuccess) alertSuccess.style.display = 'none';
-        }, 8000);
+        }, 20000);
       }
     }
   });
