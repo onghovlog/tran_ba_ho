@@ -871,7 +871,7 @@ function initContactForm() {
     el.addEventListener('change', () => el.classList.remove('is-invalid'));
   });
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const fullname = fullnameInput.value.trim();
@@ -894,35 +894,73 @@ function initContactForm() {
     const isServiceValid = validateField(serviceInput, service !== '');
 
     if (isNameValid && isPhoneValid && isEmailValid && isServiceValid) {
-      // Mock save to localStorage
-      const newLead = {
-        fullname,
-        phone,
-        email,
-        service,
-        message,
-        timestamp: new Date().toISOString()
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Gửi yêu cầu cho tôi';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '⏳ Đang gửi yêu cầu...';
+      }
+
+      const payload = {
+        "Họ và tên": fullname,
+        "Số điện thoại": phone,
+        "Email": email || "Không cung cấp",
+        "Dịch vụ / Nhu cầu": service,
+        "Nội dung yêu cầu": message || "Không có",
+        "Thời gian gửi": new Date().toLocaleString('vi-VN'),
+        "_subject": `[Website Trần Bá Hộ] Khách hàng mới: ${fullname} - ${phone}`,
+        "_template": "table",
+        "_captcha": "false"
       };
 
       try {
-        const currentLeads = JSON.parse(localStorage.getItem('tbh_leads') || '[]');
-        currentLeads.push(newLead);
-        localStorage.setItem('tbh_leads', JSON.stringify(currentLeads));
+        // Gửi trực tiếp về hộp thư Gmail: tranbaho@gmail.com
+        await fetch('https://formsubmit.co/ajax/tranbaho@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
       } catch (err) {
-        console.log('Local storage save notice:', err);
+        console.warn('Gửi formsubmit thông báo:', err);
+      } finally {
+        // Lưu bản backup vào localStorage
+        try {
+          const currentLeads = JSON.parse(localStorage.getItem('tbh_leads') || '[]');
+          currentLeads.push({
+            fullname,
+            phone,
+            email,
+            service,
+            message,
+            timestamp: new Date().toISOString()
+          });
+          localStorage.setItem('tbh_leads', JSON.stringify(currentLeads));
+        } catch (err) {
+          console.log('Local storage save notice:', err);
+        }
+
+        // Khôi phục trạng thái nút gửi
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+
+        // Hiển thị thông báo thành công
+        if (alertSuccess) {
+          alertSuccess.style.display = 'block';
+          alertSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        form.reset();
+
+        setTimeout(() => {
+          if (alertSuccess) alertSuccess.style.display = 'none';
+        }, 8000);
       }
-
-      // Display Success Alert
-      if (alertSuccess) {
-        alertSuccess.style.display = 'block';
-        alertSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-
-      form.reset();
-
-      setTimeout(() => {
-        if (alertSuccess) alertSuccess.style.display = 'none';
-      }, 7000);
     }
   });
 }
